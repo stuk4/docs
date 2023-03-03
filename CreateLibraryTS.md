@@ -19,7 +19,7 @@ npm install --save-dev react react-dom typescript @types/react
 npx tsc --init
 ```
 
-5. Copy and paste the next configuration into tsconfig.json
+4. Copy and paste the next configuration into tsconfig.json
 
 ```json
 {
@@ -59,13 +59,13 @@ npx tsc --init
 }
 ```
 
-6. Install Rollup, if you don't want to add css remove these libraries`rollup-plugin-postcss`and `postcss`:
+5. Install Rollup, if you don't want to add css remove these libraries`rollup-plugin-postcss`and `postcss`:
 
 ```bash
 yarn add -D rollup @rollup/plugin-commonjs @rollup/plugin-node-resolve @rollup/plugin-terser @rollup/plugin-typescript rollup-plugin-dts rollup-plugin-peer-deps-external rollup-plugin-terser tslib rollup-plugin-postcss postcss
 ```
 
-7. Create the file rollup.config.mjs and paste this:
+6. Create the file rollup.config.mjs and paste this:
 
 ```js
 import resolve from "@rollup/plugin-node-resolve";
@@ -113,3 +113,36 @@ export default [
   },
 ];
 ```
+
+## if you want install jest follow the next steps:
+1. Install jest and another esencial libraries
+
+```bash
+@testing-library/jest-dom @testing-library/react @testing-library/user-event @types/jest @types/react-test-renderer jest jest-environment-jsdom react-test-renderer ts-jest ts-node
+```
+
+2.Create the file jest.setup.ts and paste the next code:
+```ts
+import "@testing-library/jest-dom/extend-expect";
+```
+
+3. Create the file jest.config.ts and paste the next code:
+
+```ts
+export default {
+  testEnvironment: "jsdom",
+  transform: {
+    "^.+\\.tsx?$": ["ts-jest", { tsconfig: "tsconfig.json" }],
+  },
+  fakeTimers: { enableGlobally: true },
+  setupFilesAfterEnv: ["<rootDir>/jest.setup.ts"],
+};
+```
+
+
+
+
+
+
+
+
